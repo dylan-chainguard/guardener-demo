@@ -40,6 +40,8 @@ jobs:
 
       - name: Setup chainctl
         uses: chainguard-dev/setup-chainctl@v0.5.1
+        with:
+          identity: ${{ secrets.GUARDENER_DEMO_CHAINCTL_IDENTITY }}
 
       - name: Get GitHub OIDC token
         id: oidc
@@ -53,10 +55,6 @@ jobs:
       - name: Run guardener on Dockerfile
         shell: bash
         run: |
-          chainctl auth login \
-            --identity "${{ secrets.GUARDENER_DEMO_CHAINCTL_IDENTITY }}" \
-            --identity-token "${{ steps.oidc.outputs.token }}"
-
           chainctl agent dockerfile build -f Dockerfile -t myapp:cg \
             --group "${{ inputs.GROUP }}" \
             --non-interactive
