@@ -95,13 +95,8 @@ jobs:
 
       - name: Setup chainctl
         uses: chainguard-dev/setup-chainctl@v0.5.1
-      
-      - name: Auth with chainctl using OIDC token
-        shell: bash
-        run: |
-          chainctl auth login \
-            --identity "${{ secrets.GUARDENER_DEMO_CHAINCTL_IDENTITY }}" \
-            --identity-token "${{ steps.oidc.outputs.token }}"
+        with:
+          identity: ${{ secrets.GUARDENER_DEMO_CHAINCTL_IDENTITY }}
 
       - name: Download migrated Dockerfile
         uses: actions/download-artifact@v4
