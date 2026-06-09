@@ -1,5 +1,5 @@
-FROM ubuntu:22.04
-RUN apt-get update && apt-get install -y curl git python3
+FROM cgr.dev/chainguard/wolfi-base
+RUN apk add --no-cache curl git python3
 WORKDIR /app
 COPY . .
 CMD ["python3", "app.py"]
